@@ -44,6 +44,6 @@ func init() {
 	if err != nil {
 		logger.Logger.Panicln(err)
 	}
-	DEBUG = Cfg.Section("").Key("DEBUG").MustBool(true)
-	SECRET = Cfg.Section("").Key("SECRET").MustString("SECRET_KEY")
+	DEBUG = Cfg.Section("SERVER").Key("DEBUG").MustBool(true)
+	SECRET = Cfg.Section("SERVER").Key("SECRET").MustString("SECRET_KEY")
 }
