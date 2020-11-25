@@ -52,7 +52,7 @@ func FetchFromAlienvault() (evilIps models.EvilIps, err error) {
 				}
 				if strings.Contains(line, check) {
 					info := strings.Split(line, "#")
-					ip := info[0]
+					ip := strings.TrimSpace(info[0])
 					evilIps.Ips = append(evilIps.Ips, ip)
 				}
 			}

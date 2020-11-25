@@ -37,25 +37,27 @@ import (
 
 func GetPage(url string) (io.Reader, error) {
 	if settings.DEBUG {
-		logger.Logger.Infof("Get data from %v", url)
+		logger.Logger.Infof("> Get data from %v", url)
 	}
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
+		logger.Logger.Warnf(">>> ERROR %v", err)
 		return nil, err
 	}
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.25 Safari/537.36")
 	client := &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: false,
+				InsecureSkipVerify: true,
 			},
 		},
-		Timeout: 30 * time.Second,
+		Timeout: 60 * time.Second,
 	}
 
 	resp, err := client.Do(req)
 	if err != nil {
+		logger.Logger.Warnf(">>> ERROR %v", err)
 		return nil, err
 	}
 
@@ -68,6 +70,7 @@ func GetPage(url string) (io.Reader, error) {
 	buf := bytes.NewBuffer(nil)
 	_, err = io.Copy(buf, resp.Body)
 	if err != nil {
+		logger.Logger.Warnf(">>> ERROR %v", err)
 		return nil, err
 	}
 	return buf, nil

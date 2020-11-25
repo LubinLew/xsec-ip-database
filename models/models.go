@@ -58,11 +58,11 @@ func init() {
 	sec := cfg.Section("DATABASE")
 
 	DATA_TYPE = sec.Key("DATA_TYPE").MustString("sqlite")
-	DATA_NAME = sec.Key("DATA_NAME").MustString("data")
-	DATA_HOST = sec.Key("DATA_HOST").MustString("DATA_HOST")
+	DATA_NAME = sec.Key("DATA_NAME").MustString("waf")
+	DATA_HOST = sec.Key("DATA_HOST").MustString("127.0.0.1")
 	DATA_PORT = sec.Key("DATA_PORT").MustInt(3306)
-	USERNAME = sec.Key("USERNAME").MustString("USERNAME")
-	PASSWORD = sec.Key("PASSWORD").MustString("PASSWORD")
+	USERNAME = sec.Key("USERNAME").MustString("root")
+	PASSWORD = sec.Key("PASSWORD").MustString("root")
 	SSL_MODE = sec.Key("SSL_MODE").MustString("disable")
 
 	err := NewDbEngine()
@@ -90,9 +90,9 @@ func NewDbEngine() (err error) {
 	case "mysql":
 		dataSourceName := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8",
 			USERNAME, PASSWORD, DATA_HOST, DATA_PORT, DATA_NAME)
-
 		Engine, err = xorm.NewEngine("mysql", dataSourceName)
 		err = Engine.Ping()
+
 	case "postgres":
 		dbSourceName := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=%v", USERNAME, PASSWORD, DATA_HOST,
 			DATA_PORT, DATA_NAME, SSL_MODE)
@@ -107,5 +107,8 @@ func NewDbEngine() (err error) {
 		err = Engine.Ping()
 	}
 
+	if err != nil {
+		logger.Logger.Fatalf(" > connect db failed: %v", err)
+	}
 	return err
 }

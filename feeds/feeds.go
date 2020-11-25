@@ -84,7 +84,7 @@ func FetchEvilIps() {
 		}(fn)
 	}
 	wg.Wait()
-	logger.Logger.Infof("Fetch Evil ips Done, used time: %v", time.Since(startTime))
+	logger.Logger.Infof("=== Fetch Evil ips Done, used time: %v", time.Since(startTime))
 }
 
 func FetchEvilDns() {
@@ -98,7 +98,7 @@ func FetchEvilDns() {
 		}(fn)
 	}
 	wg.Wait()
-	logger.Logger.Infof("Fetch Evil Dns Done, used time: %v", time.Since(startTime))
+	logger.Logger.Infof("=== Fetch Evil Dns Done, used time: %v", time.Since(startTime))
 }
 
 func FetchAll(ctx *cli.Context) {
