@@ -29,7 +29,7 @@ import (
 	"xsec-evil-ips/logger"
 
 	"github.com/go-xorm/xorm"
-	"github.com/go-xorm/core"
+	"xorm.io/core"
 	"github.com/patrickmn/go-cache"
 
 	_ "github.com/go-sql-driver/mysql"
