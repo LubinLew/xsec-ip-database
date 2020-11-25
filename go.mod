@@ -26,16 +26,12 @@ require (
 	xsec-evil-ips/web v0.0.0
 )
 
-replace xsec-evil-ips/cmd v0.0.0 => ./cmd
-
-replace xsec-evil-ips/web v0.0.0 => ./web
-
-replace xsec-evil-ips/feeds v0.0.0 => ./feeds
-
-replace xsec-evil-ips/logger v0.0.0 => ./logger
-
-replace xsec-evil-ips/models v0.0.0 => ./models
-
-replace xsec-evil-ips/settings v0.0.0 => ./settings
-
-replace xsec-evil-ips/util v0.0.0 => ./util
+replace (
+	xsec-evil-ips/cmd v0.0.0 => ./cmd
+	xsec-evil-ips/web v0.0.0 => ./web
+	xsec-evil-ips/feeds v0.0.0 => ./feeds
+	xsec-evil-ips/logger v0.0.0 => ./logger
+	xsec-evil-ips/models v0.0.0 => ./models
+	xsec-evil-ips/settings v0.0.0 => ./settings
+	xsec-evil-ips/util v0.0.0 => ./util
+)
